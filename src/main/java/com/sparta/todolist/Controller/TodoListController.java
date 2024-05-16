@@ -29,5 +29,8 @@ public class TodoListController {
     public TodoListResponseDto getTodoById(@PathVariable Long id) {
         return todoListService.getTodoById(id);
     }
-
+    @PutMapping("/{id}/{password}")
+    public Long updateTodo(@PathVariable Long id, @PathVariable String password, @RequestBody TodoListRequestDto requestDto) {
+        return todoListService.updateTodo(id,password,requestDto);
+    }
 }

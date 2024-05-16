@@ -31,4 +31,10 @@ public class TodoList extends Timestamped{
         this.title = requestDto.getTitle();
         this.password=requestDto.getPassword();
     }
+
+    public void update(TodoListRequestDto requestDto) {
+        this.username = requestDto.getUsername();
+        this.contents = requestDto.getContents();
+        this.title = requestDto.getTitle();
+    }
 }
