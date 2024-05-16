@@ -35,9 +35,7 @@ public class TodoListService {
     }
     @Transactional
     public Long updateTodo(Long id, String password, TodoListRequestDto requestDto) {
-        //해당 메모 있는지 확인
         TodoList todo = findTodoList(id);
-        // memo 내용 수정
         if(todo.getPassword().equals(password)) {
             todo.update(requestDto);
         }else{
@@ -47,8 +45,19 @@ public class TodoListService {
         return id;
 
     }
+    public Long deleteTodo(Long id, String password) {
+        TodoList todo = findTodoList(id);
+        if(todo.getPassword().equals(password)) {
+            todoListRepository.delete(todo);
+        }else{
+            throw new IllegalArgumentException("비밀번호가 옳지 않습니다.");
+        }
+
+        return id;
+    }
+
     private TodoList findTodoList(Long id){
-        // 해당 메모가 DB에 존재하는지 확인
+        // 해당 일정이 DB에 존재하는지 확인
         return todoListRepository.findById(id).orElseThrow(()->
                 new IllegalArgumentException("선택한 메모는 존재하지 않습니다.")
         );

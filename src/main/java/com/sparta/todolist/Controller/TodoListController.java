@@ -33,4 +33,9 @@ public class TodoListController {
     public Long updateTodo(@PathVariable Long id, @PathVariable String password, @RequestBody TodoListRequestDto requestDto) {
         return todoListService.updateTodo(id,password,requestDto);
     }
+
+    @DeleteMapping("/{id}/{password}")
+    public Long deleteTodo(@PathVariable Long id, @PathVariable String password) {
+        return todoListService.deleteTodo(id,password);
+    }
 }
