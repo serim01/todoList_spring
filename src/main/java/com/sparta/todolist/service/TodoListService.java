@@ -27,7 +27,7 @@ public class TodoListService {
     }
 
     public List<TodoListResponseDto> getTodos() {
-        return todoListRepository.findAll().stream().map(TodoListResponseDto::new).toList();
+        return todoListRepository.findAllByOrderByCreatedAtDesc().stream().map(TodoListResponseDto::new).toList();
     }
 
     public TodoListResponseDto getTodoById(Long id) {
