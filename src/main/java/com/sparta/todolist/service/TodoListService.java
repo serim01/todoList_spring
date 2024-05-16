@@ -7,6 +7,7 @@ import com.sparta.todolist.repository.TodoListRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TodoListService {
@@ -27,5 +28,13 @@ public class TodoListService {
 
     public List<TodoListResponseDto> getTodos() {
         return todoListRepository.findAll().stream().map(TodoListResponseDto::new).toList();
+    }
+
+    public TodoListResponseDto getTodoById(Long id) {
+        TodoList todo = todoListRepository.findById(id).orElseThrow(()->
+                new IllegalArgumentException("선택한 메모는 존재하지 않습니다.")
+        );
+
+        return new TodoListResponseDto(todo);
     }
 }

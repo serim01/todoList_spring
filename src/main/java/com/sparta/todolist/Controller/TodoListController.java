@@ -3,14 +3,12 @@ package com.sparta.todolist.Controller;
 import com.sparta.todolist.dto.TodoListRequestDto;
 import com.sparta.todolist.dto.TodoListResponseDto;
 import com.sparta.todolist.service.TodoListService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("api/todos")
 public class TodoListController {
     private final TodoListService todoListService;
 
@@ -18,13 +16,18 @@ public class TodoListController {
         this.todoListService = todoListService;
     }
 
-    @PostMapping("/todo")
+    @PostMapping
     public TodoListResponseDto createTodo(@RequestBody TodoListRequestDto requestDto){
         return todoListService.createTodo(requestDto);
     }
-    @GetMapping("/todo")
+    @GetMapping
     public List<TodoListResponseDto> getTodos() {
         return todoListService.getTodos();
+    }
+
+    @GetMapping("/{id}")
+    public TodoListResponseDto getTodoById(@PathVariable Long id) {
+        return todoListService.getTodoById(id);
     }
 
 }
