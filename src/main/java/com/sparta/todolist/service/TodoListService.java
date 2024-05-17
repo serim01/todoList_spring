@@ -3,6 +3,7 @@ package com.sparta.todolist.service;
 import com.sparta.todolist.dto.TodoListRequestDto;
 import com.sparta.todolist.dto.TodoListResponseDto;
 import com.sparta.todolist.entity.TodoList;
+import com.sparta.todolist.exception.InvalidPasswordException;
 import com.sparta.todolist.repository.TodoListRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class TodoListService {
         if(todo.getPassword().equals(password)) {
             todo.update(requestDto);
         }else{
-            throw new IllegalArgumentException("비밀번호가 옳지 않습니다.");
+            throw new InvalidPasswordException();
         }
 
         return id;
@@ -50,7 +51,7 @@ public class TodoListService {
         if(todo.getPassword().equals(password)) {
             todoListRepository.delete(todo);
         }else{
-            throw new IllegalArgumentException("비밀번호가 옳지 않습니다.");
+            throw new InvalidPasswordException();
         }
 
         return id;
@@ -59,7 +60,7 @@ public class TodoListService {
     private TodoList findTodoList(Long id){
         // 해당 일정이 DB에 존재하는지 확인
         return todoListRepository.findById(id).orElseThrow(()->
-                new IllegalArgumentException("선택한 메모는 존재하지 않습니다.")
+                new IllegalArgumentException("선택한 일정은 존재하지 않습니다.")
         );
     }
 }
