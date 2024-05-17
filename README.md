@@ -63,35 +63,35 @@
 <tr>
 <td>일정전체보기</td>
 <td>GET</td>
-<td>/todos</td>
+<td>/api/todos</td>
 <td></td>
-<td>[  <br>{  <br>"id": 3,  <br>"title": "테스트3",  <br>"contents": "테스트 todo",  <br>"userName": "serim",  <br>"date": "2024-05-14"  <br>},  <br>{  <br>"id": 5,  <br>"title": "테스트5",  <br>"contents": "테스트 todo",  <br>"userName": "serim",  <br>"date": "2024-05-14"  <br>}  <br>]</td>
+<td>[  <br>{  <br>"id": 2,  <br>"title": "테스트2",  <br>"contents": "테스트 todo",  <br>"username": "jenny",  <br>"createdAt": "2024-05-16T23:55:30.153901",  <br>"modifiedAt": "2024-05-16T23:55:30.153901"  <br>},  <br>{  <br>"id": 1,  <br>"title": "테스트1",  <br>"contents": "테스트 todo",  <br>"username": "serim",  <br>"createdAt": "2024-05-16T23:54:49.07674",  <br>"modifiedAt": "2024-05-16T23:54:49.07674"  <br>}  <br>\]</td>
 </tr>
 <tr>
 <td>선택일정보기</td>
 <td>GET</td>
-<td>/todos/{id}</td>
+<td>/api/todos/{id}</td>
 <td></td>
-<td>[  <br>{  <br>"id": 3,  <br>"title": "테스트3",  <br>"contents": "테스트 todo",  <br>"userName": "serim",  <br>"date": "2024-05-14"  <br>}  <br>]</td>
+<td>{  <br>"id": 1,  <br>"title": "테스트1",  <br>"contents": "테스트 todo",  <br>"username": "serim",  <br>"createdAt": "2024-05-16T23:54:49.07674",  <br>"modifiedAt": "2024-05-16T23:54:49.07674"  <br>}</td>
 </tr>
 <tr>
 <td>일정생성</td>
 <td>POST</td>
-<td>/todos</td>
-<td>{  <br>"title": "테스트4",  <br>"contents": "테스트 todo",  <br>"userName": "serim",  <br>"password": "123456",  <br>"date": "2024-05-14"  <br>}</td>
-<td>{  <br>"id": 5,  <br>"title": "테스트5",  <br>"contents": "테스트 todo",  <br>"userName": "serim",  <br>"date": "2024-05-14"  <br>}</td>
+<td>/api/todos</td>
+<td>{  <br>"title": "테스트1",  <br>"contents": "테스트 todo",  <br>"username": "serim",  <br>"password": "123456"  <br>}</td>
+<td>{  <br>"id": 1,  <br>"title": "테스트1",  <br>"contents": "테스트 todo",  <br>"username": "serim",  <br>"createdAt": "2024-05-16T23:54:49.0767396",  <br>"modifiedAt": "2024-05-16T23:54:49.0767396"  <br>}</td>
 </tr>
 <tr>
 <td>일정수정</td>
 <td>PUT</td>
-<td>/todos/{id}/{password}</td>
-<td>{  <br>"title": "테스트2 update",  <br>"contents": "테스트 todo update",  <br>"userName": "sera"  <br>}</td>
+<td>/api/todos/{id}/{password}</td>
+<td>{  <br>"title": "테스트",  <br>"contents": "테스트 todo-수정",  <br>"username": "sera"  <br>}</td>
 <td></td>
 </tr>
 <tr>
 <td>일정삭제</td>
 <td>DELETE</td>
-<td>/todos/{id}</td>
+<td>/api/todos/{id}/{password}</td>
 <td></td>
 <td></td>
 </tr>
