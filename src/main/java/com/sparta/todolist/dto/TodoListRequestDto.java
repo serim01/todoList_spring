@@ -10,5 +10,4 @@ public class TodoListRequestDto {
     private String title;
     private String contents;
     private String password;
-    private LocalDateTime createAt;
 }
