@@ -5,6 +5,7 @@ import com.sparta.todolist.dto.TodoListResponseDto;
 import com.sparta.todolist.service.TodoListService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class TodoListController {
     @Tag(name = "1. 일정생성")
     @Operation(summary = "createTodo", description = "일정 제목, 내용, 이름, 비밀번호 입력시 생성완료")
     @PostMapping
-    public TodoListResponseDto createTodo(@RequestBody TodoListRequestDto requestDto){
+    public TodoListResponseDto createTodo(@Valid @RequestBody TodoListRequestDto requestDto){
         return todoListService.createTodo(requestDto);
     }
 
