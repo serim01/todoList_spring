@@ -43,7 +43,7 @@ public class TodoListController {
     @Tag(name = "4. 일정수정")
     @Operation(summary = "updateTodo", description = "비밀번호 일치하면 해당 id값의 일정을 찾아 제목, 내용, 담당자 수정 가능")
     @PutMapping("/{id}/{password}")
-    public Long updateTodo(@PathVariable Long id, @PathVariable String password, @RequestBody TodoListRequestDto requestDto) {
+    public Long updateTodo(@PathVariable Long id, @PathVariable String password, @Valid @RequestBody TodoListRequestDto requestDto) {
         return todoListService.updateTodo(id,password,requestDto);
     }
 
