@@ -2,6 +2,7 @@ package com.sparta.todolist.entity;
 
 import com.sparta.todolist.dto.TodoListRequestDto;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,7 +33,7 @@ public class TodoList extends Timestamped{
         this.password=requestDto.getPassword();
     }
 
-    public void update(TodoListRequestDto requestDto) {
+    public void update(@Valid TodoListRequestDto requestDto) {
         this.username = requestDto.getUsername();
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
