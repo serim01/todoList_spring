@@ -17,13 +17,13 @@ public class TodoList extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "title", nullable = false)
+    @Column(nullable = false)
     private String title;
-    @Column(name = "contents", nullable = false, length = 500)
+    @Column(nullable = false, length = 500)
     private String contents;
-    @Column(name = "username", nullable = false)
+    @Column(nullable = false)
     private String username;
-    @Column(name = "password", nullable = false)
+    @Column(nullable = false)
     private String password;
 
     public TodoList(TodoListRequestDto requestDto) {
