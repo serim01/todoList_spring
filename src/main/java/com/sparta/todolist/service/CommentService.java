@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CommentService {
@@ -17,8 +19,8 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final TodoListRepository todoListRepository;
 
-    public CommentResponseDto createComment(Long id, CommentRequestDto requestDto) {
-        TodoList todoList = todoListRepository.findById(id).orElseThrow(() ->
+    public CommentResponseDto createComment(Long todoId, CommentRequestDto requestDto) {
+        TodoList todoList = todoListRepository.findById(todoId).orElseThrow(() ->
                 new NullPointerException("해당 일정은 존재하지 않습니다.")
         );
 
@@ -26,9 +28,20 @@ public class CommentService {
         return new CommentResponseDto(comment);
     }
 
+    public List<CommentResponseDto> getComments(Long todoId) {
+        TodoList todoList = todoListRepository.findById(todoId).orElseThrow(() ->
+                new NullPointerException("해당 일정은 존재하지 않습니다.")
+        );
+        List<Comment> commentList = commentRepository.findByTodoList(todoList);
+
+        return commentList.stream()
+                .map(CommentResponseDto::new)
+                .toList();
+    }
+
     @Transactional
-    public CommentResponseDto updateComment(Long id, CommentRequestDto requestDto) {
-        Comment comment = commentRepository.findById(id).orElseThrow(()->
+    public CommentResponseDto updateComment(Long commentId, CommentRequestDto requestDto) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()->
                 new NullPointerException("해당 댓글은 존재하지않습니다.")
         );
         if(!comment.getUsername().equals(requestDto.getUsername())){
@@ -38,5 +51,15 @@ public class CommentService {
         comment.update(requestDto);
 
         return new CommentResponseDto(comment);
+    }
+
+    public void deleteComment(Long commentId, CommentRequestDto requestDto) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(()->
+                new NullPointerException("해당 댓글은 존재하지않습니다.")
+        );
+        if(!comment.getUsername().equals(requestDto.getUsername())){
+            throw new IllegalArgumentException("해당 댓글 작성자가 아닙니다.");
+        }
+        commentRepository.delete(comment);
     }
 }
