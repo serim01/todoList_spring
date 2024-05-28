@@ -8,6 +8,7 @@ import com.sparta.todolist.repository.CommentRepository;
 import com.sparta.todolist.repository.TodoListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,20 @@ public class CommentService {
         );
 
         Comment comment = commentRepository.save(new Comment(requestDto,todoList));
+        return new CommentResponseDto(comment);
+    }
+
+    @Transactional
+    public CommentResponseDto updateComment(Long id, CommentRequestDto requestDto) {
+        Comment comment = commentRepository.findById(id).orElseThrow(()->
+                new NullPointerException("해당 댓글은 존재하지않습니다.")
+        );
+        if(!comment.getUsername().equals(requestDto.getUsername())){
+            throw new IllegalArgumentException("해당 댓글 작성자가 아닙니다.");
+        }
+
+        comment.update(requestDto);
+
         return new CommentResponseDto(comment);
     }
 }

@@ -23,4 +23,8 @@ public class GlobalExceptionHandler {
         String errorMessage = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
+    @ExceptionHandler(NullPointerException.class) //NullPointException  - message에 있는 내용 출력
+    public ResponseEntity<String> handleNullPointExceptions(NullPointerException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
