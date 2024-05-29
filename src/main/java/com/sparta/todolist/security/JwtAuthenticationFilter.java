@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setStatus(401);
 
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("로그인 실패!");
+        response.getWriter().write("회원을 찾을 수 없습니다.");
     }
 
 }
