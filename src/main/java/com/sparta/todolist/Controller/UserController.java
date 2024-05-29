@@ -1,5 +1,6 @@
 package com.sparta.todolist.Controller;
 
+import com.sparta.todolist.dto.LoginRequestDto;
 import com.sparta.todolist.dto.SignupRequestDto;
 import com.sparta.todolist.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,6 +43,11 @@ public class UserController {
         userService.signup(requestDto);
 
         return new ResponseEntity<>("회원가입 성공!!\nHttpStatus : "+ HttpStatus.OK, HttpStatus.OK);
+    }
+    @Operation(summary = "로그인", description = "사용자 이름, 비밀번호로 로그인해야함.")
+    @PostMapping("/user/login")
+    public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto) {
+        return ResponseEntity.ok("swagger 문서에 작성되기 위해 틀만 작성한 것임. - 실제 로그인은 JwtAuthenticationFilter 에서 진행");
     }
 
 }
