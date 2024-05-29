@@ -18,8 +18,8 @@ public class TodoListResponseDto {
         this.id = todo.getId();
         this.title = todo.getTitle();
         this.contents = todo.getContents();
-        this.username = todo.getUsername();
         this.createdAt = todo.getCreatedAt();
         this.modifiedAt = todo.getModifiedAt();
+        this.username = todo.getUser().getUsername();
     }
 }

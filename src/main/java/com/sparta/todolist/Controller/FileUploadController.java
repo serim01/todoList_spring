@@ -1,5 +1,6 @@
 package com.sparta.todolist.Controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 @RestController
+@Tag(name = "FileUploadController", description = "파일업로드 관련 api")
 public class FileUploadController {
     private static final String UPLOAD_DIR = "C:/uploads/";
 

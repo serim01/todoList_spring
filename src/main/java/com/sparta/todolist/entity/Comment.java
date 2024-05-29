@@ -24,16 +24,18 @@ public class Comment extends Timestamped {
     private Long id;
     @Column(nullable = false, length = 500)
     private String contents;
-    @Column(nullable = false)
-    private String username;
+
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
 
     @ManyToOne
     @JoinColumn(name="todo_id")
     private TodoList todoList;
 
-    public Comment(CommentRequestDto requestDto, TodoList todoList) {
+    public Comment(CommentRequestDto requestDto, TodoList todoList, User user) {
         this.contents = requestDto.getContents();
-        this.username = requestDto.getUsername();
+        this.user = user;
         this.todoList = todoList;
     }
 

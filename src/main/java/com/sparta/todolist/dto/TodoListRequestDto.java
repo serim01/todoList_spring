@@ -1,15 +1,11 @@
 package com.sparta.todolist.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 
 @Getter
 public class TodoListRequestDto {
-    @Email(message = "이메일 형식에 맞춰 입력해주세요")
-    private String username;
-
     @Size(min=1, max=200, message = "최소 1글자 이상 200글자 이하만 입력이 가능합니다.")
     private String title;
 

@@ -22,20 +22,22 @@ public class TodoList extends Timestamped{
     @Column(nullable = false, length = 500)
     private String contents;
     @Column(nullable = false)
-    private String username;
-    @Column(nullable = false)
     private String password;
 
-    public TodoList(TodoListRequestDto requestDto) {
-        this.username = requestDto.getUsername();
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+
+    public TodoList(TodoListRequestDto requestDto,User user) {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
         this.password=requestDto.getPassword();
+        this.user = user;
     }
 
-    public void update(@Valid TodoListRequestDto requestDto) {
-        this.username = requestDto.getUsername();
+    public void update(@Valid TodoListRequestDto requestDto,User user) {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
+        this.user = user;
     }
 }
