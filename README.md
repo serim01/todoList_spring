@@ -16,7 +16,7 @@ https://documenter.getpostman.com/view/34879249/2sA3JQ4KPn#intro
 https://documenter.getpostman.com/view/34879249/2sA3QteX8F#intro
 
 ## 2.Use Case Diagram
---
+![image](https://github.com/serim01/todoList_spring/assets/50200959/5112a75c-1221-4f26-ad72-3b4ed566b37b)
 
 ## 3.API 명세서
 [입문주차 PostMan](https://documenter.getpostman.com/view/34879249/2sA3JQ4KPn)
