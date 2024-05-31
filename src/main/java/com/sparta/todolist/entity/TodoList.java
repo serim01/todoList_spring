@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Entity // JPA가 관리할 수 있는 Entity 클래스 지정
 @Getter
@@ -27,6 +29,9 @@ public class TodoList extends Timestamped{
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+
+    @OneToMany(mappedBy = "todoList", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
 
     public TodoList(TodoListRequestDto requestDto,User user) {
         this.contents = requestDto.getContents();
