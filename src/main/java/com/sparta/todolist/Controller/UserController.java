@@ -28,7 +28,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @Operation(summary = "회원가입", description = "별명, 사용자이름, 비밀번호는 필수입력이며, Admin계정은 별도 과정 필요함.")
+    @Operation(summary = "회원가입", description = "별명, 사용자이름, 비밀번호는 필수입력이며, Admin 계정은 별도 과정 필요함.")
     @PostMapping("/user/signup")
     public ResponseEntity<String> signup(@Valid @RequestBody SignupRequestDto requestDto, BindingResult bindingResult) {
         // Validation 예외처리
@@ -37,17 +37,17 @@ public class UserController {
             for (FieldError fieldError : bindingResult.getFieldErrors()) {
                 log.error(fieldError.getField() + " 필드 : " + fieldError.getDefaultMessage());
             }
-            return new ResponseEntity<>("회원가입 정보가 잘못되었습니다.", HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원가입 정보가 잘못되었습니다.");
         }
 
         userService.signup(requestDto);
 
-        return new ResponseEntity<>("회원가입 성공!!\nHttpStatus : "+ HttpStatus.OK, HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.CREATED).body("회원가입 성공\nHttpStatus : "+ HttpStatus.OK);
     }
     @Operation(summary = "로그인", description = "사용자 이름, 비밀번호로 로그인해야함.")
     @PostMapping("/user/login")
     public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto) {
-        return ResponseEntity.ok("swagger 문서에 작성되기 위해 틀만 작성한 것임. - 실제 로그인은 JwtAuthenticationFilter 에서 진행");
+        return ResponseEntity.ok().body("로그인 성공!");
     }
 
 }

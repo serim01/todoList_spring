@@ -42,27 +42,23 @@ public class TodoListService {
     }
 
     @Transactional
-    public Long updateTodo(Long id, String password, TodoListRequestDto requestDto, User user) {
+    public TodoListResponseDto updateTodo(Long id, TodoListRequestDto requestDto, User user) {
         TodoList todo = findTodoList(id, user);
-        if (todo.getPassword().equals(password)) {
+        if (todo.getPassword().equals(requestDto.getPassword())) {
             todo.update(requestDto, user);
         } else {
             throw new InvalidPasswordException();
         }
-
-        return id;
-
+        return new TodoListResponseDto(todo);
     }
 
-    public Long deleteTodo(Long id, String password, User user) {
+    public void deleteTodo(Long id, TodoListRequestDto requestDto, User user) {
         TodoList todo = findTodoList(id, user);
-        if (todo.getPassword().equals(password)) {
+        if (todo.getPassword().equals(requestDto.getPassword())) {
             todoListRepository.delete(todo);
         } else {
             throw new InvalidPasswordException();
         }
-
-        return id;
     }
 
     //삭제, 수정에 필요한 findTodoList
@@ -75,7 +71,7 @@ public class TodoListService {
     }
 
     //조회는 id값만 일치하면 모두 조회되어야함.
-    private TodoList findTodoList(Long id) {
+    protected TodoList findTodoList(Long id) {
         return todoListRepository.findById(id).orElseThrow(() ->
                 new IllegalArgumentException("선택한 일정은 존재하지 않습니다.")
         );
