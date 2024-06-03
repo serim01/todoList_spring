@@ -3,7 +3,7 @@ package com.sparta.todolist.service;
 import com.sparta.todolist.dto.CommentRequestDto;
 import com.sparta.todolist.dto.CommentResponseDto;
 import com.sparta.todolist.entity.Comment;
-import com.sparta.todolist.entity.TodoList;
+import com.sparta.todolist.entity.Todo;
 import com.sparta.todolist.entity.User;
 import com.sparta.todolist.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,17 +17,17 @@ import java.util.List;
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final TodoListService todoListService;
+    private final TodoService todoService;
 
     public CommentResponseDto createComment(Long todoId, CommentRequestDto requestDto, User user) {
-        TodoList todoList = todoListService.findTodoList(todoId);
-        Comment comment = commentRepository.save(new Comment(requestDto,todoList,user));
+        Todo todo = todoService.findTodoList(todoId);
+        Comment comment = commentRepository.save(new Comment(requestDto, todo,user));
         return new CommentResponseDto(comment);
     }
 
     public List<CommentResponseDto> getComments(Long todoId) {
-        TodoList todoList = todoListService.findTodoList(todoId);
-        List<Comment> commentList = commentRepository.findByTodoList(todoList);
+        Todo todo = todoService.findTodoList(todoId);
+        List<Comment> commentList = commentRepository.findByTodo(todo);
 
         return commentList.stream()
                 .map(CommentResponseDto::new)
@@ -36,7 +36,7 @@ public class CommentService {
 
     @Transactional
     public CommentResponseDto updateComment(Long todoId, Long commentId, CommentRequestDto requestDto, User user) {
-        todoListService.findTodoList(todoId);
+        todoService.findTodoList(todoId);
         Comment comment = findComment(commentId);
         findUser(comment, user);
 
@@ -46,7 +46,7 @@ public class CommentService {
     }
 
     public void deleteComment(Long todoId, Long commentId, User user) {
-        todoListService.findTodoList(todoId);
+        todoService.findTodoList(todoId);
         Comment comment = findComment(commentId);
         findUser(comment, user);
         commentRepository.delete(comment);

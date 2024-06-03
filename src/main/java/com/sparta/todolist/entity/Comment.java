@@ -31,12 +31,12 @@ public class Comment extends Timestamped {
 
     @ManyToOne
     @JoinColumn(name="todo_id")
-    private TodoList todoList;
+    private Todo todo;
 
-    public Comment(CommentRequestDto requestDto, TodoList todoList, User user) {
+    public Comment(CommentRequestDto requestDto, Todo todo, User user) {
         this.contents = requestDto.getContents();
         this.user = user;
-        this.todoList = todoList;
+        this.todo = todo;
     }
 
     public void update(CommentRequestDto requestDto) {

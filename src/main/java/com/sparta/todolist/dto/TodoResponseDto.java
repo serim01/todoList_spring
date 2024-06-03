@@ -1,12 +1,12 @@
 package com.sparta.todolist.dto;
 
-import com.sparta.todolist.entity.TodoList;
+import com.sparta.todolist.entity.Todo;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class TodoListResponseDto {
+public class TodoResponseDto {
     private Long id;
     private String title;
     private String contents;
@@ -14,7 +14,7 @@ public class TodoListResponseDto {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
-    public TodoListResponseDto(TodoList todo) {
+    public TodoResponseDto(Todo todo) {
         this.id = todo.getId();
         this.title = todo.getTitle();
         this.contents = todo.getContents();

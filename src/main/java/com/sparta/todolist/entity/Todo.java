@@ -1,6 +1,6 @@
 package com.sparta.todolist.entity;
 
-import com.sparta.todolist.dto.TodoListRequestDto;
+import com.sparta.todolist.dto.TodoRequestDto;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.Getter;
@@ -15,7 +15,7 @@ import java.util.List;
 @Setter //조심히 사용!!..
 @Table(name = "todo") // 매핑할 테이블의 이름을 지정
 @NoArgsConstructor
-public class TodoList extends Timestamped{
+public class Todo extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,17 +30,17 @@ public class TodoList extends Timestamped{
     @JoinColumn(name="user_id")
     private User user;
 
-    @OneToMany(mappedBy = "todoList", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "todo", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments;
 
-    public TodoList(TodoListRequestDto requestDto,User user) {
+    public Todo(TodoRequestDto requestDto, User user) {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
         this.password=requestDto.getPassword();
         this.user = user;
     }
 
-    public void update(@Valid TodoListRequestDto requestDto,User user) {
+    public void update(@Valid TodoRequestDto requestDto, User user) {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
         this.user = user;
