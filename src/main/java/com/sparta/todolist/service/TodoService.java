@@ -45,7 +45,7 @@ public class TodoService {
     public TodoResponseDto updateTodo(Long id, TodoRequestDto requestDto, User user) {
         Todo todo = findTodoList(id, user);
         if (todo.getPassword().equals(requestDto.getPassword())) {
-            todo.update(requestDto, user);
+            todo.update(requestDto);
         } else {
             throw new InvalidPasswordException();
         }

@@ -40,9 +40,8 @@ public class Todo extends Timestamped{
         this.user = user;
     }
 
-    public void update(@Valid TodoRequestDto requestDto, User user) {
+    public void update(@Valid TodoRequestDto requestDto) {
         this.contents = requestDto.getContents();
         this.title = requestDto.getTitle();
-        this.user = user;
     }
 }
